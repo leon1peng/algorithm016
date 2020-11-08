@@ -1,29 +1,19 @@
-# 学习笔记
-### 位运算  布隆过滤器  LRU缓存  排序算法。
+import heapq
 
-* 位运算： 在一些题目中，巧妙的应用位运算往往可以极大地提升运算时间，要熟记一些常用的位运算技巧
-* LRU和LFU缓存的算法要记牢
-* 经典的排序算法要总结熟记，整理后上传
-
-# 十大经典排序算法
-
-### 测试数据
 original_list = [2, 56, 25, 14, 5, 38, 6, 2, 0, 45, 14, 36, 21, 12, 1, 1, 23, 56, 9, 0, 1, 9, 54]
 
-### 比较排序法
 
-1、冒泡排序
-```Python
+# 比较排序法
+# 冒泡排序
 def bubble_sort(nums_list: list) -> list:
     for i in range(1, len(nums_list)):
         for j in range(0, len(nums_list) - i):
             if nums_list[j] > nums_list[j + 1]:
                 nums_list[j], nums_list[j + 1] = nums_list[j + 1], nums_list[j]
     return nums_list
-```
 
-2、快速排序
-```Python
+
+# 快速排序
 def quick_sort(nums_list):
     def solve(nums_list, left, right):
 
@@ -45,10 +35,9 @@ def quick_sort(nums_list):
         return nums_list
 
     return solve(nums_list, 0, len(nums_list) - 1)
-```
 
-3、归并排序
-```Python
+
+# 归并排序
 def merge_sort(nums_list):
     if len(nums_list) <= 1:
         return nums_list
@@ -69,23 +58,21 @@ def merge_sort(nums_list):
     res += right[j:]
 
     return res
-```
 
-4、堆排序
-```Python
-import heapq
+
+# 堆排序
 def heap_sort(nums_list):
     heapq.heapify(nums_list)
     res = []
     while nums_list:
         res.append(heapq.heappop(nums_list))
     return res
-```
 
-5、选择排序
-```Python
+
+# 选择排序
 def select_sort(nums_list):
     left = len(nums_list)
+    print(left)
     for i in range(left - 1):
         min_index = i
         for j in range(i + 1, left):
@@ -93,10 +80,9 @@ def select_sort(nums_list):
                 min_index = j
         nums_list[i], nums_list[min_index] = nums_list[min_index], nums_list[i]
     return nums_list
-```
 
-6、插入排序
-```Python
+
+# 插入排序
 def insert_sort(nums_list):
     for i in range(1, len(nums_list)):
         j = i - 1
@@ -107,10 +93,9 @@ def insert_sort(nums_list):
                 nums_list[j] = key
             j -= 1
     return nums_list
-```
 
-7、希尔排序
-```Python
+
+# 希尔排序
 def shell_sort(nums_list):
     count = len(nums_list)
     step = 2
@@ -128,12 +113,10 @@ def shell_sort(nums_list):
                 j += group
         group //= step
     return nums_list
-```
 
-### 非比较排序法
 
-8、计数排序
-```Python
+# 非比较排序法
+# 计数排序
 def count_sort(nums_list):
     res = [None for i in range(len(nums_list))]
     max_arr = max(nums_list)
@@ -146,10 +129,9 @@ def count_sort(nums_list):
         res[c[nums_list[i]] - 1] = nums_list[i]
         c[nums_list[i]] -= 1
     return res
-```
 
-9、桶排序
-```Python
+
+# 桶排序
 def bucket_sort(nums_list):
     max_num = max(nums_list)
     bucket = [0] * (max_num + 1)
@@ -161,10 +143,9 @@ def bucket_sort(nums_list):
             for y in range(bucket[j]):
                 sort_nums.append(j)
     return sort_nums
-```
 
-10、基数排序
-```Python
+
+# 基数排序
 def radix_sort(nums_list):
     max_arr = max(nums_list)
     d = len(str(max_arr))
@@ -174,4 +155,36 @@ def radix_sort(nums_list):
             s[i // (10 ** k) % 10].append(i)
         nums_list = [j for i in s for j in i]
     return nums_list
-```
+
+
+if __name__ == '__main__':
+    # result_bubble_sort = bubble_sort(original_list)
+    # print("1. 冒泡排序: ", result_bubble_sort)
+    # print("")
+    # result_quick_sort = quick_sort(original_list)
+    # print("2. 快速排序: ", result_quick_sort)
+    # print("")
+    # result_merge_sort = merge_sort(original_list)
+    # print("3. 归并排序: ", result_merge_sort)
+    # print("")
+    # result_heap_sort = heap_sort(original_list)
+    # print("4. 堆排序: ", result_heap_sort)
+    # print("")
+    # result_select_sort = select_sort(original_list)
+    # print("5. 选择排序: ", result_select_sort)
+    # print("")
+    # result_insert_sort = insert_sort(original_list)
+    # print("6. 插入排序: ", result_insert_sort)
+    # print("")
+    # result_shell_sort = shell_sort(original_list)
+    # print("7. 希尔排序: ", result_shell_sort)
+    # print("")
+    # result_count_sort = count_sort(original_list)
+    # print("8. 计数排序: ", result_count_sort)
+    # print("")
+    result_bucket_sort = bucket_sort(original_list)
+    print("9. 桶排序: ", result_bucket_sort)
+    print("")
+    # result_radix_sort = radix_sort(original_list)
+    # print("10. 基数排序: ", result_radix_sort)
+    # print("")
